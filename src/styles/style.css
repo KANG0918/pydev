@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 重複出現的可以整理過來 */
+.btn {
+    @apply px-3 py-2 text-lg  text-white rounded-sm inline-block;
+}
+
+.btn-primary{
+    @apply bg-py-blue-dark text-white;
+}
+.form-control {
+    & .label{
+        @apply block my-1 text-sm font-bold;
+    }
+    & .input{
+        @apply border border border-py-blue-dark px-2 text-lg py-1;
+    }
+    & .textarea {
+        @apply border border border-py-blue-dark px-2 text-lg py-1;
+    }
+}
+.flash{
+    @apply flex justify-between items-center bg-gray-100;
+
+    & .success{
+        @apply w-full font-bold  px-6 py-2  bg-py-yellow-light;
+    }
+    & .error{
+        @apply w-full font-bold  px-6 py-2  bg-red-200;
+    }
+}
+/* cdn 不能用apply */

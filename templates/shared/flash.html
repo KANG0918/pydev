@@ -1,0 +1,12 @@
+{%if messages%}
+<div x-data x-ref="flash" class="flash ">
+<ul class="w-full">
+    {%for message in messages %}
+    <li class="{{message.tags}}">
+        {{message}}
+    </li>
+    {%endfor%}
+</ul>
+<button class="w-6 h-6 " @click="$refs.flash.remove()">X</button>
+</div>
+{%endif%}
