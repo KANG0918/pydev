@@ -13,9 +13,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
+from lib.utils.project import is_dev
 
-load_dotenv()  # take environment variables from .env.
+if is_dev():
+    from dotenv import load_dotenv
+
+    load_dotenv()  # take environment variables from .env.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("APP_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = is_dev()
 
 ALLOWED_HOSTS = []
 
@@ -44,11 +47,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_extensions",
     "turbo_helper",
     "pages",
     "resumes",
 ]
+
+# 因為上線時不會用到，所以做判斷，在本機時才加上去
+
+if os.getenv("DJANGO_ENV", "development") == "development":
+    INSTALLED_APPS += ["django_extensions"]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
