@@ -17,11 +17,11 @@
 <section class="my-4">
     {%if comments%}
     <ul id="comments">
-        
+
         {%for comment in comments%}
         <!-- 把comment餵給comment.html -->
          <!-- only只可以吃餵過去的，不可以去空中拿 -->
-        {%include 'resumes/_comment.html' with comment=comment only%} 
+        {%include 'resumes/_comment.html' with comment=comment only%}
         <!-- Partial Template 非完整頁面-->
         {%endfor%}
     </ul>

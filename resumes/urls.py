@@ -1,5 +1,6 @@
-from . import views
 from django.urls import path
+
+from . import views
 
 app_name = "resume"  # 因不同app中可能有index、show所以需要作出一個空間
 

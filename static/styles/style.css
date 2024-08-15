@@ -615,6 +615,14 @@ video {
   display: flex;
 }
 
+.contents {
+  display: contents;
+}
+
+.hidden {
+  display: none;
+}
+
 .h-6 {
   height: 1.5rem;
 }
@@ -659,11 +667,6 @@ video {
 .bg-\[\#F2D57E\] {
   --tw-bg-opacity: 1;
   background-color: rgb(242 213 126 / var(--tw-bg-opacity));
-}
-
-.bg-red-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
 }
 
 .bg-red-400 {

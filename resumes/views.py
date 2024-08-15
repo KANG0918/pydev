@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from .models import Resume, Comment
 from django.http import HttpResponse
-from .forms import ResumeForm
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
+
+from .forms import ResumeForm
+from .models import Comment, Resume
 
 # from turbo_helper import TurboStreamResponse
 
@@ -71,23 +72,6 @@ def comment(req, id):
     if req.method == "POST":
         resume = get_object_or_404(Resume, pk=id)
         comment = resume.comment_set.create(content=req.POST["content"])
-        # messages.success(req, "留言成功")
-        # 新增留言，comment_set.create是django語法，把內容塞進表單裡的某欄位
-        # comment_html = render_to_stream(
-        #     req,
-        #     "resumes/_comment.html",
-        #     {"comment": comment},
-        #     action="append",
-        #     target="comments",
-        # )
-        # success_message_html = render_to_stream(
-        #     req,
-        #     "layouts/base.html",
-        #     {"message": "留言成功"},
-        #     action="update",
-        #     target="success-message",
-        # )
-        # return comment_html + success_message_html
         return render(req, "resumes/_comment.html", {"comment": comment})
 
 

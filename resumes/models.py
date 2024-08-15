@@ -1,5 +1,7 @@
 from typing import Any
+
 from django.db import models
+
 from lib.models.soft_delete import SoftDeleteable, SoftDeleteManager
 
 
@@ -25,5 +27,5 @@ class Comment(SoftDeleteable, models.Model):
 
     class Meta:
         indexes = [
-            models.Index(fields=["deleted_at"]),  # 創建索引直
+            models.Index(fields=["deleted_at"]),  # 創建索引值
         ]

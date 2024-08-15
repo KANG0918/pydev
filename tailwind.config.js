@@ -11,7 +11,7 @@ module.exports = {
         "py-blue-dark":"#295773",
       },
     },
-   
+
   },
   plugins: [],
 }
