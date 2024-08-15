@@ -7,8 +7,8 @@
 <ul>
     {% for resume in resumes%}
     <li>
-        {{resume.name}}
-        <a href="{% url 'resume:show' resume.id%}">{{resume.email}}</a>
+        
+        <a href="{% url 'resume:show' resume.id%}">{{resume.name}}{{resume.email}}</a>
         <a href="{% url 'resume:edit' resume.id%}" class=" btn-primary">更新</a>
         <a href="{% url 'resume:delete' resume.id%}" class=" btn-primary">刪除</a>
     </li>

@@ -3,4 +3,30 @@
 {%block content%}
 <h1>{{resume.name}}</h1>
 <h2>{{resume.email}}</h2>
+<form method="post" hx-confirm="確定新增留言？" hx-target='#comments' hx-swap='afterbegin' hx-post="{%url 'resume:comment' resume.id%}">
+    {%csrf_token%}
+    <section class="flex flex-col w-1/3 gap-2" x-data="{ content: '' }">
+        <textarea name="content" row='5' class="border-2 border-gray-500" x-model="content"></textarea>
+        <div>
+            <button :disabled="content==''" class=" btn btn-primary disabled:bg-gray-300">新增留言</button>
+        </div>
+    </section>
+
+</form>
+<hr />
+<section class="my-4">
+    {%if comments%}
+    <ul id="comments">
+        
+        {%for comment in comments%}
+        <!-- 把comment餵給comment.html -->
+         <!-- only只可以吃餵過去的，不可以去空中拿 -->
+        {%include 'resumes/_comment.html' with comment=comment only%} 
+        <!-- Partial Template 非完整頁面-->
+        {%endfor%}
+    </ul>
+    {%else%}
+    <div id="comments">目前無任何留言</div>
+    {%endif%}
+</section>
 {%endblock%}
