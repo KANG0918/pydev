@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 from lib.utils.project import is_dev
 
 if is_dev():
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
     "pages",
     "resumes",
     "users",
+    "payments",
 ]
 
 # 因為上線時不會用到，所以做判斷，在本機時才加上去
@@ -142,3 +145,5 @@ STATICFILES_DIRS = [BASE_DIR / "static"]  # 在專案跟目錄的static
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_URL = reverse_lazy("users:sign_in")

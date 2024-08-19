@@ -1,14 +1,21 @@
 {%extends 'layouts/base.html'%}
 
 {%block content%}
-<h1>{{resume.name}}</h1>
+<h1>{{resume.name}}
+    {%include 'resumes/_bookmark.html' with resume=resume bookmarked=bookmarked%}
+
+</h1>
 <h2>{{resume.email}}</h2>
 <form method="post" hx-confirm="確定新增留言？" hx-target='#comments' hx-swap='afterbegin' hx-post="{%url 'resume:comment' resume.id%}">
     {%csrf_token%}
     <section class="flex flex-col w-1/3 gap-2" x-data="{ content: '' }">
         <textarea name="content" row='5' class="border-2 border-gray-500" x-model="content"></textarea>
         <div>
+            {%if request.user.is_authenticated%}
             <button :disabled="content==''" class=" btn btn-primary disabled:bg-gray-300">新增留言</button>
+            {%else%}
+            <button disabled class=" btn btn-primary disabled:bg-gray-300">請先登入</button>
+            {%endif%}
         </div>
     </section>
 
@@ -21,7 +28,7 @@
         {%for comment in comments%}
         <!-- 把comment餵給comment.html -->
          <!-- only只可以吃餵過去的，不可以去空中拿 -->
-        {%include 'resumes/_comment.html' with comment=comment only%}
+        {%include 'resumes/_comment.html' with comment=comment%}
         <!-- Partial Template 非完整頁面-->
         {%endfor%}
     </ul>

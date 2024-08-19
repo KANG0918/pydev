@@ -2,15 +2,18 @@
 
 {%block content%}
 <h1>Developers</h1>
+{%if request.user.is_authenticated%}
 <a href="{%url 'resume:new'%}" class="btn btn-primary">新增</a>
-
+{%endif%}
 <ul>
     {% for resume in resumes%}
     <li>
 
         <a href="{% url 'resume:show' resume.id%}">{{resume.name}}{{resume.email}}</a>
-        <a href="{% url 'resume:edit' resume.id%}" class=" btn-primary">更新</a>
+        {%if resume.user == request.user%}
+        <a href="{% url 'resume:edit' resume.id%}" class=" btn-primary">編輯</a>
         <a href="{% url 'resume:delete' resume.id%}" class=" btn-primary">刪除</a>
+        {%endif%}
     </li>
     {%endfor%}
 </ul>
